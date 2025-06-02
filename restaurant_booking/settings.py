@@ -138,3 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 RAZORPAY_API_KEY ="rzp_test_eJZIjXbAA5gKyQ"
 RAZORPAY_API_SECRET ="g6WvlZHOQX5VfNc02sry56Ni"
+
+
+import os
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME'), 'localhost']
