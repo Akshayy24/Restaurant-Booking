@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Redirecting to Razorpay...</h2>
+<p>Please wait. You will be redirected.</p>
+<form id="razorpay-form" method="post" action="{% url 'verify_payment' %}">
+    {% csrf_token %}
+    <input type="hidden" name="razorpay_order_id" value="{{ order_id }}">
+    <input type="hidden" name="razorpay_payment_id" value="FAKE_PAYMENT_ID_FOR_TESTING">
+    <input type="hidden" name="razorpay_signature" value="FAKE_SIGNATURE_FOR_TESTING">
+    <button type="submit">Click here if not redirected</button>
+</form>
+<script>
+    document.getElementById('razorpay-form').submit();
+</script>
+{% endblock %}

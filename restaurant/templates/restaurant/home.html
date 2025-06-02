@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-4">Welcome to the Restaurant Booking System</h1>
+<div class="d-flex gap-3">
+    {% if user.is_authenticated and user.role == 'admin' %}
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-primary btn-lg">Admin Dashboard</a>
+    {% endif %}
+    {% if user.is_authenticated and user.role == 'customer' %}
+        <a href="{% url 'make_booking' %}" class="btn btn-success btn-lg">Make a Booking</a>
+        <a href="{% url 'booking_history' %}" class="btn btn-info btn-lg">Booking History</a>
+    {% endif %}
+</div>
+{% endblock %}

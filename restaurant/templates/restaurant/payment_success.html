@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Payment Successful!</h2>
+<p>Your booking is now pending approval. Booking ID: {{ booking.id }}</p>
+<a href="{% url 'booking_history' %}">View Booking History</a>
+{% endblock %}

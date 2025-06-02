@@ -1,0 +1,10 @@
+{% for booking in bookings %}
+    <li>
+        {{ booking.open_day.date }} - {{ booking.seats_booked }} seats - {{ booking.status }}
+        {% if booking.status == 'approved' and not booking.is_paid %}
+            - <a href="{% url 'initiate_payment' booking.id %}">Pay Now</a>
+        {% elif booking.is_paid %}
+            - Paid ✅
+        {% endif %}
+    </li>
+{% endfor %}
