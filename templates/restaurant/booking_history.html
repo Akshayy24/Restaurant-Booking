@@ -1,10 +1,19 @@
-{% for booking in bookings %}
-    <li>
-        {{ booking.open_day.date }} - {{ booking.seats_booked }} seats - {{ booking.status }}
-        {% if booking.status == 'approved' and not booking.is_paid %}
-            - <a href="{% url 'initiate_payment' booking.id %}">Pay Now</a>
-        {% elif booking.is_paid %}
-            - Paid ✅
-        {% endif %}
-    </li>
-{% endfor %}
+<div class="card">
+    <div class="card-body">
+        <h2>Booking History</h2>
+        <ul class="list-group">
+            {% for booking in bookings %}
+                <li class="list-group-item">
+                    {{ booking.open_day.date }} - {{ booking.seats_booked }} seats - {{ booking.status }}
+                    {% if booking.status == 'approved' and not booking.is_paid %}
+                        - <a href="{% url 'initiate_payment' booking.id %}">Pay Now</a>
+                    {% elif booking.is_paid %}
+                        - Paid ✅
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li class="list-group-item">No bookings found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

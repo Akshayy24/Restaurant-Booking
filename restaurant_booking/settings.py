@@ -141,4 +141,4 @@ RAZORPAY_API_SECRET ="g6WvlZHOQX5VfNc02sry56Ni"
 
 
 import os
-ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME'), 'localhost']
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME'), 'localhost','127.0.0.1']
