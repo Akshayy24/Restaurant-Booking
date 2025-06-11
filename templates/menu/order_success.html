@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container text-center">
+  <div class="alert alert-success mt-5 p-4 shadow">
+    <h2 class="mb-3">🎉 Thank You!</h2>
+    <p>Your order has been placed successfully.</p>
+    <a href="{% url 'food_menu' %}" class="btn btn-outline-primary mt-3">Back to Menu</a>
+  </div>
+</div>
+{% endblock %}

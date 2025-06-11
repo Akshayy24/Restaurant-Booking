@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h1 class="mb-4 text-center">🍽️ Our Food Menu</h1>
+  <div class="row">
+    {% for item in items %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text text-muted">{{ item.description }}</p>
+            <p class="card-text fw-bold">₹{{ item.price }}</p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center">No food items available.</p>
+    {% endfor %}
+  </div>
+  <div class="text-center mt-4">
+    <a href="{% url 'place_order' %}" class="btn btn-success btn-lg">Place an Order</a>
+  </div>
+</div>
+{% endblock %}
