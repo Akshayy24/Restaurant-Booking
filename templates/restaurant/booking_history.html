@@ -1,19 +1,45 @@
-<div class="card">
-    <div class="card-body">
-        <h2>Booking History</h2>
-        <ul class="list-group">
-            {% for booking in bookings %}
-                <li class="list-group-item">
-                    {{ booking.open_day.date }} - {{ booking.seats_booked }} seats - {{ booking.status }}
-                    {% if booking.status == 'approved' and not booking.is_paid %}
-                        - <a href="{% url 'initiate_payment' booking.id %}">Pay Now</a>
-                    {% elif booking.is_paid %}
-                        - Paid ✅
-                    {% endif %}
-                </li>
-            {% empty %}
-                <li class="list-group-item">No bookings found.</li>
-            {% endfor %}
-        </ul>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Your Booking History</h5>
+        </div>
+        <div class="card-body">
+            {% if bookings %}
+                <ul class="list-group list-group-flush">
+                    {% for booking in bookings %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <div>
+                                <p class="mb-1"><strong>Date:</strong> {{ booking.open_day.date }}</p>
+                                <p class="mb-1"><strong>Seats:</strong> {{ booking.seats_booked }}</p>
+                                <p class="mb-1">
+                                    <strong>Status:</strong>
+                                    <span class="badge 
+                                        {% if booking.status == 'approved' %}bg-success
+                                        {% elif booking.status == 'pending' %}bg-warning text-dark
+                                        {% else %}bg-danger{% endif %}">
+                                        {{ booking.status|title }}
+                                    </span>
+                                </p>
+                            </div>
+                            <div>
+                                {% if booking.status == 'approved' and not booking.is_paid %}
+                                    <a href="{% url 'initiate_payment' booking.id %}" class="btn btn-outline-success btn-sm">Pay Now</a>
+                                {% elif booking.is_paid %}
+                                    <span class="badge bg-success">Paid ✅</span>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="alert alert-info mb-0">
+                    You have no bookings yet.
+                </div>
+            {% endif %}
+        </div>
     </div>
 </div>
+{% endblock %}
